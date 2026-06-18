@@ -8,15 +8,15 @@ import attributePentagram from '@/assets/attribute-pentagram.png'
 
 const ATTRIBUTES = [
     // agi
-    { id: "agi", x: "26%", y: "18%" },
+    { id: "agi", x: "50%", y: "18%" },
     // for
-    { id: "for", x: "10%", y: "39%" },
+    { id: "for", x: "19%", y: "40%" },
     // int
-    { id: "int", x: "42.5%", y: "39%" },
+    { id: "int", x: "81.25%", y: "40%" },
     // pre
-    { id: "pre", x: "15%", y: "76%" },
+    { id: "pre", x: "29%", y: "77%" },
     // vig
-    { id: "vig", x: "36.5%", y: "76%" },
+    { id: "vig", x: "70%", y: "77%" },
 ] as const
 
 export default function CreateCharPage() {
@@ -104,12 +104,11 @@ export default function CreateCharPage() {
                     </ContextMenu>
                 </div>
 
-                <div className="relative w-full max-w-3xl">
+                <div className="relative w-full max-w-100 aspect-square">
                     <img
                         src={attributePentagram}
                         alt="atributos"
-                        width={400}
-                        height={400}
+                        className="w-full h-auto object-contain"
                     />
 
                     {ATTRIBUTES.map((attr) => (
@@ -121,7 +120,7 @@ export default function CreateCharPage() {
                                 top: attr.y,
                             }}
                         >
-                            <div className="group relative w-16">
+                            <div className="group relative w-16 hover:underline">
                                 <div className="flex h-10 items-center justify-center bg-transparent text-xl">
                                     {attribute[attr.id]}
                                 </div>
@@ -143,6 +142,8 @@ export default function CreateCharPage() {
                         </div>
                     ))}
                 </div>
+
+                <div className="mt-12 pt-8">asdf</div>
             </div>
         </div>
     </div>
