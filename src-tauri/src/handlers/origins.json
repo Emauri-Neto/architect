@@ -1,0 +1,49 @@
+[
+    {
+        "name": "academico",
+        "label": "Acadêmico",
+        "skills": [
+            {
+                "name": "ciencias",
+                "label": "Ciências"
+            },
+            {
+                "name": "investigacao",
+                "label": "Investigação"
+            }
+        ],
+        "description": "Você era um pesquisador ou professor universitário. De forma proposital ou não, seus estudos tocaram em assuntos misteriosos e chamaram a atenção da Ordo Realitas.",
+        "ability": "Saber é Poder",
+        "ability_description": "Quando faz um teste usando Intelecto, você pode gastar 2 PE para receber +5 nesse teste."
+    },
+    {
+        "name": "agente_de_saude",
+        "label": "Agente de Saúde",
+        "skills": [
+            {
+                "name": "intuicao",
+                "label": "Intuição"
+            },
+            {
+                "name": "medicina",
+                "label": "Medicina"
+            }
+        ],
+        "description": "Você era um profissional da saúde como um enfermeiro, farmacêutico, médico, psicólogo ou socorrista, treinado no atendimento e cuidado de pessoas. Você pode ter sido surpreendido por um evento paranormal durante o trabalho ou mesmo cuidado de um agente da Ordem em uma emergência, que ficou surpreso com o quão bem você lidou com a situação.",
+        "ability": "Técnica Medicinal.",
+        "ability_description": "Sempre que cura um personagem, você adiciona seu Intelecto no total de PV curados."
+    },
+    {
+        "name": "amnesico",
+        "label": "Amnésico",
+        "skills": [
+            {
+                "name": "amnesico",
+                "label": "Duas à escolha do mestre."
+            }
+        ],
+        "description": "Você perdeu a maior parte da memória. Sabe apenas o próprio nome, ou nem isso. Sua amnésia pode ser resultado de um trauma paranormal ou mesmo de um ritual. Talvez você tenha sido vítima de cultistas? Talvez você tenha sido um cultista? Seja como for, hoje a Ordem é a única família que conhece. Quem sabe, cumprindo missões, você descubra algo sobre seu passado.",
+        "ability": "Vislumbres do Passado.",
+        "ability_description": "Uma vez por sessão, você pode fazer um teste de Intelecto (DT 10) para reconhecer pessoas ou lugares familiares, que tenha encontrado antes de perder a memória. Se passar, recebe 1d4 PE temporários e, a critério do mestre, uma informação útil."
+    }
+]
