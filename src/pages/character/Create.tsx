@@ -5,9 +5,10 @@ import { Minus, Plus } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useEffect, useState } from "react";
 import attributePentagram from '@/assets/attribute-pentagram.png'
+import logoOrdem from '@/assets/logo-ordem.png'
 import { Button } from "@/components/ui/button";
 import { invoke } from '@tauri-apps/api/core';
-import { IOrigins, IRulebooks } from "@/types";
+import { IRulebooks } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import React from "react";
@@ -40,7 +41,6 @@ export default function CreateCharPage() {
     });
 
     const [originsList, setOriginsList] = useState<IRulebooks | null>(null);
-
     const [openSources, setOpenSources] = useState<Record<string, boolean>>({})
 
     useEffect(() => {
@@ -78,9 +78,9 @@ export default function CreateCharPage() {
         })
     }
 
-    return <div className="flex h-screen justify-center font-heading">
+    return <div className="flex flex-col h-screen items-center font-heading">
         <div className="w-full max-w-7xl flex m-10 p-10">
-            <div className="w-full flex flex-col">
+            <div className="w-full h-full flex flex-col">
                 <div className="text-xl font-semibold leading-tight">Criação de personagem</div>
                 <div className="text-sm leading-tight text-muted-foreground">
                     Distribua seus pontos para definir os pontos fortes e fracos do personagem.
@@ -179,8 +179,6 @@ export default function CreateCharPage() {
                         </div>
                     ))}
                 </div>
-
-                <div className="mt-12 pt-8">asdf</div>
             </div>
             <div className="flex flex-col w-full">
                 <div className="flex justify-end">
@@ -192,7 +190,7 @@ export default function CreateCharPage() {
                 <div className="mt-4 py-3 h-full px-4">
                     <p className="font-semibold text-3xl text-contrast pb-4">Origens</p>
                     <ScrollArea className="w-full h-full">
-                        <Accordion type="multiple" className="max-w-lg w-full">
+                        <Accordion type="multiple" className="w-full sm:pr-4 pb-32">
                             {Object.entries(originsList?.sources ?? {}).map(([source, items]) => (
                                 <React.Fragment key={source}>
                                     <Collapsible
@@ -204,8 +202,13 @@ export default function CreateCharPage() {
                                             }))
                                         }
                                     >
-                                        <CollapsibleTrigger className="flex items-start w-full">
-                                            {source}
+                                        <CollapsibleTrigger className="w-full my-4">
+                                            <img
+                                                className="object-fill object-center w-full h-12"
+                                                src={logoOrdem}
+                                                alt={source}
+                                            />
+                                            {/* {source} */}
                                         </CollapsibleTrigger>
 
                                         <CollapsibleContent>
@@ -255,7 +258,6 @@ export default function CreateCharPage() {
                                             ))}
                                         </CollapsibleContent>
                                     </Collapsible>
-
                                 </React.Fragment>
                             ))
                             }
@@ -264,5 +266,6 @@ export default function CreateCharPage() {
                 </div>
             </div>
         </div>
+        asdf
     </div>
 }
