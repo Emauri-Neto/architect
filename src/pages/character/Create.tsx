@@ -96,14 +96,14 @@ export default function CreateCharPage() {
                                 Nome do Personagem
                             </span>
                         </Label>
-                        <Input id="characterName" placeholder=" " className="bg-card dark:bg-card pr-10 pl-3" onChange={(e) => setCharName(e.target.value)} />
+                        <Input id="characterName" placeholder=" " className="bg-card pr-10 pl-3" onChange={(e) => setCharName(e.target.value)} />
                     </div>
 
                     <ContextMenu>
                         <ContextMenuTrigger>
                             <div className="group relative w-28">
                                 <div
-                                    className="flex text-sm h-10 items-center justify-center border bg-card"
+                                    className="flex text-sm h-10 items-center justify-center bg-card border-b"
                                 >
                                     {nex}% NEX
                                 </div>
@@ -140,8 +140,8 @@ export default function CreateCharPage() {
                         <li className="text-muted-foreground">Reduzir um atributo para 0 concede <span className="text-contrast font-bold">+1 ponto.</span></li>
                     </ul>
                 </div>
-                <div className="relative w-full max-w-100 aspect-square">
 
+                <div className="relative w-full max-w-100 aspect-square">
                     <img
                         src={attributePentagram}
                         alt="atributos"
@@ -179,6 +179,11 @@ export default function CreateCharPage() {
                         </div>
                     ))}
                 </div>
+
+                <div className="mt-16">
+                    <p className="font-semibold text-3xl text-contrast pb-4">Classes</p>
+                    <div className="">asdf</div>
+                </div>
             </div>
             <div className="flex flex-col w-full">
                 <div className="flex justify-end">
@@ -187,9 +192,9 @@ export default function CreateCharPage() {
                     </Button>
                 </div>
 
-                <div className="mt-4 py-3 h-full px-4">
+                <div className="mt-4 py-3 px-4">
                     <p className="font-semibold text-3xl text-contrast pb-4">Origens</p>
-                    <ScrollArea className="w-full h-full">
+                    <ScrollArea className="w-full">
                         <Accordion type="multiple" className="w-full sm:pr-4 pb-32">
                             {Object.entries(originsList?.sources ?? {}).map(([source, items]) => (
                                 <React.Fragment key={source}>
@@ -202,19 +207,18 @@ export default function CreateCharPage() {
                                             }))
                                         }
                                     >
-                                        <CollapsibleTrigger className="w-full my-4">
+                                        <CollapsibleTrigger className="w-full my-4 hover:border hover:border-contrast transition-colors">
                                             <img
                                                 className="object-fill object-center w-full h-12"
                                                 src={logoOrdem}
                                                 alt={source}
                                             />
-                                            {/* {source} */}
                                         </CollapsibleTrigger>
 
                                         <CollapsibleContent>
                                             {items.map(originItem => (
                                                 <AccordionItem value={originItem.name} key={originItem.name} className={cn(origin === originItem.name && "text-primary font-bold bg-primary/10", "border-b border-border")}>
-                                                    <AccordionTrigger className="text-lg font-semibold hover:text-contrast transition-colors">
+                                                    <AccordionTrigger className="text-lg font-semibold hover:text-contrast transition-colors items-center">
                                                         {originItem.label}
                                                     </AccordionTrigger>
 
@@ -259,13 +263,11 @@ export default function CreateCharPage() {
                                         </CollapsibleContent>
                                     </Collapsible>
                                 </React.Fragment>
-                            ))
-                            }
+                            ))}
                         </Accordion>
                     </ScrollArea>
                 </div>
             </div>
         </div>
-        asdf
     </div>
 }
