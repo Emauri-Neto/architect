@@ -1,3 +1,7 @@
+export interface IRulebooks {
+    sources: Record<string, IOrigins[]>
+}
+
 export interface IOrigins {
     name: string,
     label: string,

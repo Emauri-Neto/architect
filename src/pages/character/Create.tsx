@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import attributePentagram from '@/assets/attribute-pentagram.png'
 import { Button } from "@/components/ui/button";
 import { invoke } from '@tauri-apps/api/core';
-import { IOrigins } from "@/types";
+import { IOrigins, IRulebooks } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const ATTRIBUTES = [
     // agi
@@ -37,11 +39,13 @@ export default function CreateCharPage() {
         vig: 1,
     });
 
-    const [originsList, setOriginsList] = useState<IOrigins[]>([]);
+    const [originsList, setOriginsList] = useState<IRulebooks | null>(null);
+
+    const [openSources, setOpenSources] = useState<Record<string, boolean>>({})
 
     useEffect(() => {
         const getOrigins = async () => {
-            const origins = await invoke<IOrigins[]>("get_origins");
+            const origins = await invoke<IRulebooks>("get_origins");
             setOriginsList(origins)
         };
 
@@ -75,7 +79,7 @@ export default function CreateCharPage() {
     }
 
     return <div className="flex h-screen justify-center font-heading">
-        <div className="w-full max-w-7xl bg-accent flex m-10 p-10">
+        <div className="w-full max-w-7xl flex m-10 p-10">
             <div className="w-full flex flex-col">
                 <div className="text-xl font-semibold leading-tight">Criação de personagem</div>
                 <div className="text-sm leading-tight text-muted-foreground">
@@ -189,48 +193,72 @@ export default function CreateCharPage() {
                     <p className="font-semibold text-3xl text-contrast pb-4">Origens</p>
                     <ScrollArea className="w-full h-full">
                         <Accordion type="multiple" className="max-w-lg w-full">
-                            {originsList.map((origin) => (
-                                <AccordionItem value={origin.name} key={origin.name} className="border-b border-border">
-                                    <AccordionTrigger className="text-lg font-semibold hover:text-contrast transition-colors">
-                                        {origin.label}
-                                    </AccordionTrigger>
+                            {Object.entries(originsList?.sources ?? {}).map(([source, items]) => (
+                                <React.Fragment key={source}>
+                                    <Collapsible
+                                        open={!!openSources[source]}
+                                        onOpenChange={(value) =>
+                                            setOpenSources((prev) => ({
+                                                ...prev,
+                                                [source]: value,
+                                            }))
+                                        }
+                                    >
+                                        <CollapsibleTrigger className="flex items-start w-full">
+                                            {source}
+                                        </CollapsibleTrigger>
 
-                                    <AccordionContent className="pb-6 pt-2 text-sm">
-                                        <p className="text-muted-foreground mb-4 leading-relaxed">
-                                            {origin.description}
-                                        </p>
+                                        <CollapsibleContent>
+                                            {items.map(originItem => (
+                                                <AccordionItem value={originItem.name} key={originItem.name} className={cn(origin === originItem.name && "text-primary font-bold bg-primary/10", "border-b border-border")}>
+                                                    <AccordionTrigger className="text-lg font-semibold hover:text-contrast transition-colors">
+                                                        {originItem.label}
+                                                    </AccordionTrigger>
 
-                                        <div className="flex flex-col gap-y-5">
-                                            <div className="flex flex-col gap-y-2">
-                                                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                                                    Perícias Iniciais
-                                                </span>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {origin.skills.map((skill) => (
-                                                        <span
-                                                            key={skill.label}
-                                                            className="inline-flex items-center bg-contrast/10 px-2.5 py-1 text-xs font-medium text-contrast ring-1 ring-inset ring-contrast/20"
-                                                        >
-                                                            {skill.label}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                                    <AccordionContent className="pb-6 pt-2 text-sm h-full">
+                                                        <p className="text-muted-foreground mb-4 leading-relaxed">
+                                                            {originItem.description}
+                                                        </p>
 
-                                            <div className="rounded-lg border border-border bg-card/50 p-4 shadow-sm">
-                                                <div className="flex items-center gap-x-2 mb-1.5">
-                                                    <span className="font-bold text-sm tracking-wide text-contrast">
-                                                        {origin.ability}
-                                                    </span>
-                                                </div>
-                                                <p className="text-muted-foreground text-xs leading-relaxed">
-                                                    {origin.ability_description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </AccordionContent>
-                                </AccordionItem>
-                            ))}
+                                                        <div className="flex flex-col gap-y-5">
+                                                            <div className="flex flex-col gap-y-2">
+                                                                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                                                    Perícias Iniciais
+                                                                </span>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {originItem.skills.map((skill) => (
+                                                                        <span
+                                                                            key={skill.label}
+                                                                            className="inline-flex items-center bg-contrast/10 px-2.5 py-1 text-xs font-medium text-contrast ring-1 ring-inset ring-contrast/20"
+                                                                        >
+                                                                            {skill.label}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="rounded-lg border border-border bg-card/50 p-4 shadow-sm">
+                                                                <div className="flex items-center gap-x-2 mb-1.5">
+                                                                    <span className="font-bold text-sm tracking-wide text-contrast">
+                                                                        {originItem.ability}
+                                                                    </span>
+                                                                </div>
+                                                                <p className="text-muted-foreground text-xs leading-relaxed">
+                                                                    {originItem.ability_description}
+                                                                </p>
+                                                            </div>
+
+                                                            <Button onClick={() => setOrigin(originItem.name)}>Escolher</Button>
+                                                        </div>
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                            ))}
+                                        </CollapsibleContent>
+                                    </Collapsible>
+
+                                </React.Fragment>
+                            ))
+                            }
                         </Accordion>
                     </ScrollArea>
                 </div>
