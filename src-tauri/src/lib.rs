@@ -1,11 +1,11 @@
 mod handlers;
-use handlers::get_origins;
+use handlers::{get_classes, get_origins};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_origins])
+        .invoke_handler(tauri::generate_handler![get_origins, get_classes])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

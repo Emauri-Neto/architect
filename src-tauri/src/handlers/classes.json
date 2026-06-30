@@ -1,0 +1,54 @@
+{
+  "sources": {
+    "basic_rulebook": [
+      {
+        "name": "combatente",
+        "label": "Combatente",
+        "role": "Linha de frente",
+        "description": "Agentes treinados para sobreviver ao contato direto com ameaças paranormais. São mais resistentes, letais com armas e preparados para proteger o grupo em cenas de ação.",
+        "stats": {
+          "hit_points": "20 + Vigor iniciais; +4 + Vigor por aumento de NEX",
+          "effort_points": "2 + Presença iniciais; +2 por aumento de NEX",
+          "sanity": "12 iniciais; +3 por aumento de NEX"
+        },
+        "features": [
+          "Melhor desempenho em combate direto",
+          "Boa resistência física",
+          "Foco em armas, manobras e presença tática"
+        ]
+      },
+      {
+        "name": "especialista",
+        "label": "Especialista",
+        "role": "Perícias e suporte",
+        "description": "Agentes versáteis que resolvem problemas com técnica, investigação e preparo. Brilham fora do combate e mantêm ferramentas úteis para cobrir lacunas da equipe.",
+        "stats": {
+          "hit_points": "16 + Vigor iniciais; +3 + Vigor por aumento de NEX",
+          "effort_points": "3 + Presença iniciais; +3 por aumento de NEX",
+          "sanity": "16 iniciais; +4 por aumento de NEX"
+        },
+        "features": [
+          "Maior variedade de perícias",
+          "Flexibilidade em investigação e interação",
+          "Bom equilíbrio entre sobrevivência e recursos"
+        ]
+      },
+      {
+        "name": "ocultista",
+        "label": "Ocultista",
+        "role": "Rituais e conhecimento",
+        "description": "Agentes que estudam o Outro Lado e canalizam rituais. São menos resistentes fisicamente, mas têm acesso às ferramentas paranormais mais poderosas.",
+        "stats": {
+          "hit_points": "12 + Vigor iniciais; +2 + Vigor por aumento de NEX",
+          "effort_points": "4 + Presença iniciais; +4 por aumento de NEX",
+          "sanity": "20 iniciais; +5 por aumento de NEX"
+        },
+        "features": [
+          "Acesso a rituais",
+          "Alto potencial de controle e utilidade paranormal",
+          "Exige cuidado com posicionamento e gestão de recursos"
+        ]
+      }
+    ]
+  }
+}

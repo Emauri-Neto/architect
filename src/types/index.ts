@@ -1,5 +1,5 @@
-export interface IRulebooks {
-    sources: Record<string, IOrigins[]>
+export interface IRulebooks<T = IOrigins> {
+    sources: Record<string, T[]>
 }
 
 export interface IOrigins {
@@ -14,4 +14,17 @@ export interface IOrigins {
 interface Skills {
     label: string,
     name: string
+}
+
+export interface IClass {
+    name: string,
+    label: string,
+    role: string,
+    description: string,
+    stats: {
+        hit_points: string,
+        effort_points: string,
+        sanity: string
+    },
+    features: string[]
 }

@@ -3,7 +3,7 @@ import HomePage from "./pages/Home";
 import "./App.css";
 import { ThemeProvider } from "./components/theme";
 import CharactersPage from "./pages/character/Characters";
-import CreateCharPage from "./pages/character/create";
+import CreateCharPage from "./pages/character/Create";
 
 function App() {
   return <HashRouter>
